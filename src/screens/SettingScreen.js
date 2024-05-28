@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
 import {
   Image,
   SafeAreaView,
@@ -21,7 +22,17 @@ export default function SettingScreen({navigation}) {
             style={styles.backButtonLogo}
           />
         </TouchableOpacity>
-        <Text style={{textAlign: 'center'}}>Ayarlar</Text>
+        <Text style={{textAlign: 'center', fontSize: 20, color: 'black'}}>
+          Ayarlar
+        </Text>
+        <View
+          style={{
+            width: '100%',
+            height: 1,
+            backgroundColor: '#E9E9E9',
+            marginVertical: 15,
+          }}
+        />
       </View>
       <View style={styles.textBoxs}>
         <Text style={styles.textBox}>Version 1.0</Text>
@@ -33,7 +44,9 @@ export default function SettingScreen({navigation}) {
 
 const styles = StyleSheet.create({
   body: {
-    margin: 25,
+    padding: 25,
+    height: '100%',
+    backgroundColor: 'white',
   },
   headerSetting: {
     width: '100%',
@@ -42,16 +55,20 @@ const styles = StyleSheet.create({
     zIndex: 100,
     position: 'absolute',
     left: 0,
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     justifyContent: 'center',
     alignItems: 'center',
   },
   backButtonLogo: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
   },
-  textBoxs: {},
+  textBoxs: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   textBox: {
     textAlign: 'center',
   },

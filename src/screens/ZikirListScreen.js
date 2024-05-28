@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-shadow */
 
 import {
   SafeAreaView,
@@ -19,8 +20,6 @@ const zikirList = [
   {id: 6, zikirText: 'Subhanallahi ve Bihamdihi Subhanallahil Azim'},
   {id: 7, zikirText: 'Allahumme ecrina minennar'},
   {id: 8, zikirText: 'Subhanallahi ve Bihamdihi'},
-  {id: 9, zikirText: 'Yarabbi Şükür'},
-  {id: 10, zikirText: 'Fenerbahçe'},
 ];
 
 export default function ZikirListScreen({navigation}) {

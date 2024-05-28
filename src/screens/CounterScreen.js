@@ -102,9 +102,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: 'brown',
     borderWidth: 2,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    // Android
+    elevation: 5,
   },
   zikirBoxText: {
-    fontSize: 25,
+    fontSize: 20,
     textAlign: 'center',
   },
   zikirCounter: {
