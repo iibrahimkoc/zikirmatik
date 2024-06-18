@@ -16,10 +16,9 @@ const zikirList = [
   {id: 2, zikirText: 'Subhanallah'},
   {id: 3, zikirText: 'Elhamdülillah'},
   {id: 4, zikirText: 'Allahu ekber'},
-  {id: 5, zikirText: 'La ilahe illallah'},
-  {id: 6, zikirText: 'Subhanallahi ve Bihamdihi Subhanallahil Azim'},
-  {id: 7, zikirText: 'Allahumme ecrina minennar'},
-  {id: 8, zikirText: 'Subhanallahi ve Bihamdihi'},
+  {id: 5, zikirText: 'Subhanallahi ve Bihamdihi Subhanallahil Azim'},
+  {id: 6, zikirText: 'Allahumme ecrina minennar'},
+  {id: 7, zikirText: 'Subhanallahi ve Bihamdihi'},
 ];
 
 export default function ZikirListScreen({navigation}) {

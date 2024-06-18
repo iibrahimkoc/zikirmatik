@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-
+import React, {useState, useEffect} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -8,28 +8,68 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CounterScreen = ({route, navigation}) => {
   const {zikirText} = route.params;
 
-  const [zikirCounter, addzikirCounter] = useState(0);
+  const [zikirCounter, setZikirCounter] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const storedCount = await getData(zikirText);
+      if (storedCount !== null) {
+        setZikirCounter(storedCount);
+      }
+    };
+    fetchData();
+  }, [zikirText]);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value.toString());
+    } catch (error) {
+      console.error(`Error storing data for key ${key}: `, error);
+    }
+  };
+
+  const getData = async key => {
+    try {
+      const value = await AsyncStorage.getItem(key);
+      if (value !== null) {
+        return parseInt(value);
+      }
+      return 0;
+    } catch (error) {
+      console.error(`Error retrieving data for key ${key}: `, error);
+      return 0;
+    }
+  };
+
+  const resetCounter = async () => {
+    setZikirCounter(0);
+    await storeData(zikirText, '0');
+    console.log(await getData(zikirText));
+  };
+
+  const incrementCounter = async () => {
+    const newCounterValue = zikirCounter + 1;
+    setZikirCounter(newCounterValue);
+    await storeData(zikirText, newCounterValue.toString());
+  };
 
   return (
-    <SafeAreaView style={styles.body}>
+    <SafeAreaView style={styles.container}>
       <TouchableOpacity
         style={styles.backButton}
-        onPress={() => navigation.navigate('ZikirListScreen')}>
+        onPress={() => navigation.goBack()}>
         <Image
           source={require('../images/back.png')}
           style={styles.backButtonPhoto}
         />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.counterReset}
-        onPress={() => {
-          addzikirCounter(zikirCounter - zikirCounter);
-        }}>
+
+      <TouchableOpacity style={styles.counterReset} onPress={resetCounter}>
         <Image
           source={require('../images/restart.png')}
           style={styles.resetPhoto}
@@ -44,24 +84,18 @@ const CounterScreen = ({route, navigation}) => {
         <Text style={styles.zikirCounterText}>{zikirCounter}</Text>
       </View>
 
-      <TouchableOpacity
-        style={styles.zikirButton}
-        onPress={() => {
-          addzikirCounter(zikirCounter + 1);
-        }}>
+      <TouchableOpacity style={styles.zikirButton} onPress={incrementCounter}>
         <Text style={styles.zikirButtonText}>ZİKİR</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 };
 
-export default CounterScreen;
-
 const styles = StyleSheet.create({
-  body: {
-    width: '100%',
-    height: '100%',
+  container: {
+    flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   backButton: {
     position: 'absolute',
@@ -106,7 +140,6 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    // Android
     elevation: 5,
   },
   zikirBoxText: {
@@ -128,9 +161,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
     borderRadius: 50,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   zikirButtonText: {
     fontSize: 20,
     textAlign: 'center',
   },
 });
+
+export default CounterScreen;

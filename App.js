@@ -28,27 +28,18 @@ const StackNavigator = () => {
 const TabNavigator = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Zikirler"
       screenOptions={({route}) => ({
         headerShown: false,
-        // eslint-disable-next-line react/no-unstable-nested-components
-        tabBarIcon: ({focused, color, size}) => {
-          let iconName;
-          if (route.name === 'Zikirler') {
-            iconName = focused ? 'ios-list-box' : 'ios-list';
-          } else if (route.name === 'Esmaül Hüsna') {
-            iconName = focused ? 'ios-list-box' : 'ios-list';
-          } else if (route.name === 'Ayarlar') {
-            iconName = focused ? 'ios-settings' : 'ios-settings-outline';
-          }
-
-          // You can return any component that you like here!
-          return <Icon name={iconName} size={size} color={color} />;
-        },
-      })}
-      tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      }}>
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: [
+          {
+            display: 'flex',
+          },
+          null,
+        ],
+      })}>
       <Tab.Screen name="Esmaül Hüsna" component={EsmaulHusna} />
       <Tab.Screen name="Zikirler" component={StackNavigator} />
       <Tab.Screen name="Ayarlar" component={SettingScreen} />
