@@ -84,7 +84,11 @@ const CounterScreen = ({route, navigation}) => {
         <Text style={styles.zikirCounterText}>{zikirCounter}</Text>
       </View>
 
-      <TouchableOpacity style={styles.zikirButton} onPress={incrementCounter}>
+      <TouchableOpacity
+        style={styles.zikirButton}
+        onPress={() => {
+          incrementCounter();
+        }}>
         <Text style={styles.zikirButtonText}>ZİKİR</Text>
       </TouchableOpacity>
     </SafeAreaView>

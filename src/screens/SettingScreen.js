@@ -34,6 +34,9 @@ export default function SettingScreen({navigation}) {
           }}
         />
       </View>
+      <View>
+        <Text>Titreşim</Text>
+      </View>
       <View style={styles.textBoxs}>
         <Text style={styles.textBox}>Version 1.0</Text>
         <Text style={styles.textBox}>-- iibrahimkoc --</Text>
